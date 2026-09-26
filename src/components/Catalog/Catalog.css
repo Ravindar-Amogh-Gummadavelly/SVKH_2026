@@ -1,0 +1,71 @@
+/* Catalog Section CSS */
+.catalog-section {
+  padding: 6rem 0;
+  background: var(--bg-dark);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.category-catalog-group {
+  margin-bottom: 5rem;
+  scroll-margin-top: calc(var(--header-height) + 2rem);
+}
+
+.category-catalog-group:last-child {
+  margin-bottom: 0;
+}
+
+.category-group-header {
+  border-left: 3px solid var(--accent-gold);
+  padding-left: 1.25rem;
+  margin-bottom: 2.25rem;
+}
+
+.category-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.35rem;
+}
+
+.category-badge {
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #000000;
+  background: var(--accent-gold);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-sm);
+}
+
+.category-group-name {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.5px;
+}
+
+.category-group-desc {
+  font-size: 0.98rem;
+  color: var(--text-secondary);
+  max-width: 800px;
+}
+
+/* 4 Column / 2 Column / 1 Column Responsive Grid */
+.products-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+}
+
+@media (min-width: 640px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .products-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
