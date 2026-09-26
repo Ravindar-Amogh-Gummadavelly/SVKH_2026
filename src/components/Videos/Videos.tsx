@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Play, Clock, Film, X } from 'lucide-react';
 import { VIDEOS } from '../../data/storeInfo';
 import { VideoShowcase } from '../../types';
@@ -6,6 +6,16 @@ import './Videos.css';
 
 export const Videos: React.FC = () => {
   const [activeVideo, setActiveVideo] = useState<VideoShowcase | null>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && activeVideo) {
+        setActiveVideo(null);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [activeVideo]);
 
   return (
     <section id="videos" className="videos-section">

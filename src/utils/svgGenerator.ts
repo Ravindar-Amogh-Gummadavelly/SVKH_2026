@@ -11,11 +11,13 @@ export function generateCookwareSvg(
   let accentColor = '#e5a93c'; // Warm metallic gold accent
   let patternSvg = '';
 
+  const cleanId = productName.replace(/[^a-zA-Z0-9]/g, '');
+
   if (colorScheme === 'honeycomb') {
     primaryGradient = ['#23272e', '#0f1216'];
     accentColor = '#38bdf8'; // Sleek cyan accent
     patternSvg = `
-      <pattern id="honeycomb-${productName.replace(/\s+/g, '')}" width="16" height="28" patternUnits="userSpaceOnUse" patternTransform="scale(1.5)">
+      <pattern id="honeycomb-${cleanId}" width="16" height="28" patternUnits="userSpaceOnUse" patternTransform="scale(1.5)">
         <path d="M8 0 L16 4.6 L16 13.8 L8 18.4 L0 13.8 L0 4.6 Z" fill="none" stroke="#ffffff" stroke-opacity="0.08" stroke-width="1.2"/>
         <path d="M8 18.4 L16 23 L16 32.2 L8 36.8 L0 32.2 L0 23 Z" fill="none" stroke="#ffffff" stroke-opacity="0.08" stroke-width="1.2"/>
       </pattern>
@@ -24,7 +26,7 @@ export function generateCookwareSvg(
     primaryGradient = ['#1e232a', '#0d1013'];
     accentColor = '#f43f5e'; // Deep rose/ruby accent
     patternSvg = `
-      <pattern id="hexapro-${productName.replace(/\s+/g, '')}" width="20" height="20" patternUnits="userSpaceOnUse">
+      <pattern id="hexapro-${cleanId}" width="20" height="20" patternUnits="userSpaceOnUse">
         <polygon points="10,0 20,5 20,15 10,20 0,15 0,5" fill="none" stroke="#ffffff" stroke-opacity="0.07" stroke-width="1.5"/>
       </pattern>
     `;
@@ -33,7 +35,7 @@ export function generateCookwareSvg(
     primaryGradient = ['#333842', '#1a1d24'];
     accentColor = '#f59e0b';
     patternSvg = `
-      <pattern id="grid-${productName.replace(/\s+/g, '')}" width="30" height="30" patternUnits="userSpaceOnUse">
+      <pattern id="grid-${cleanId}" width="30" height="30" patternUnits="userSpaceOnUse">
         <circle cx="15" cy="15" r="1.5" fill="#ffffff" fill-opacity="0.1"/>
       </pattern>
     `;
@@ -71,7 +73,7 @@ export function generateCookwareSvg(
   <rect width="800" height="600" fill="url(#bgGrad)" />
   
   <!-- Subtle pattern overlay -->
-  ${patternSvg ? `<rect width="800" height="600" fill="url(#${colorScheme === 'honeycomb' ? 'honeycomb-' : colorScheme === 'hexapro' ? 'hexapro-' : 'grid-'}${productName.replace(/\s+/g, '')})" />` : ''}
+  ${patternSvg ? `<rect width="800" height="600" fill="url(#${colorScheme === 'honeycomb' ? 'honeycomb-' : colorScheme === 'hexapro' ? 'hexapro-' : 'grid-'}${cleanId})" />` : ''}
 
   <!-- Ambient Glow -->
   <circle cx="400" cy="300" r="240" fill="url(#glow)" />
@@ -87,9 +89,9 @@ export function generateCookwareSvg(
     <ellipse cx="0" cy="0" rx="170" ry="96" fill="${colorScheme === 'honeycomb' ? '#111827' : '#0f172a'}" />
     
     ${colorScheme === 'honeycomb' ? `
-      <ellipse cx="0" cy="0" rx="160" ry="90" fill="url(#honeycomb-${productName.replace(/\s+/g, '')})" />
+      <ellipse cx="0" cy="0" rx="160" ry="90" fill="url(#honeycomb-${cleanId})" />
     ` : colorScheme === 'hexapro' ? `
-      <ellipse cx="0" cy="0" rx="160" ry="90" fill="url(#hexapro-${productName.replace(/\s+/g, '')})" />
+      <ellipse cx="0" cy="0" rx="160" ry="90" fill="url(#hexapro-${cleanId})" />
     ` : `
       <circle cx="0" cy="0" r="70" fill="none" stroke="#475569" stroke-width="3" />
       <circle cx="0" cy="0" r="45" fill="none" stroke="${accentColor}" stroke-width="2" stroke-dasharray="6,6" />

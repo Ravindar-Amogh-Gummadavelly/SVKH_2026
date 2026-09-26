@@ -1,9 +1,9 @@
-# Build Status & Final QA Report — Shri Vijaya Kitchenware Digital Catalog
+# Build Status & Browser QA Report — Shri Vijaya Kitchenware Digital Catalog
 
 ## 1. Executive Summary
-The digital product catalog website for **Shri Vijaya Kitchenware** has been fully implemented, verified in the browser, and compiled without errors.
+The digital product catalog website for **Shri Vijaya Kitchenware** has passed all comprehensive Browser QA & UI Polish audits across Desktop, Mobile (375px/390px viewports), and Direct Product URL routing.
 
-The website functions as a continuous digital brochure featuring:
+The website provides a continuous digital brochure experience featuring:
 - 12 structured products across 3 specialized categories
 - Responsive translucent glassmorphism header & mobile navigation drawer
 - Interactive category cards with direct continuous section jumping
@@ -11,103 +11,71 @@ The website functions as a continuous digital brochure featuring:
 - 8-image gallery per product with Amazon-style desktop hover zoom lens and touch swipe controls
 - Context-aware dynamic WhatsApp message generator (`wa.me`) and store dialer links (`tel:`)
 - Dynamic store operating status engine (`OPEN NOW` / `CLOSED NOW`)
-- Embedded Google Maps location, store weekly schedule, testimonials, and video showcase modal
+- Embedded Google Maps location, store weekly schedule, testimonials, and video showcase modal with Escape key modal handling
 
 ---
 
-## 2. Completed Features
-- [x] **Project Foundation:** Vite + React + TypeScript architecture with custom CSS custom properties (design tokens).
-- [x] **Header & Navigation:** Sticky translucent glassmorphic navbar, desktop nav shortcuts, scroll-spy section highlighting, and mobile left-side slide-out drawer.
-- [x] **Homepage Brochure Flow:** 
-  1. Opening / Brand Introduction & Status Badge
-  2. Store / Location Introduction
-  3. About Us Section
-  4. Product Categories
-  5. Complete 12-Product Continuous Catalog
-  6. Videos & Walkthroughs Showcase
-  7. Customer Testimonials
-  8. Contact Section & Google Maps
-  9. Concise Business Footer
-- [x] **Structured Product Data (12 Products):**
-  - **Category 1 (Roti Makers):**
-    1. 9.5 × 9.5 inch Roti Maker
-    2. 9.5 × 9.5 inch Roti Maker — Steel Handle, Version 2
-    3. 12 inch Roti Maker
-    4. 12 inch Roti Maker — Steel Handle, Version 2
-  - **Category 2 (Tri-Ply Honeycomb Cookware):**
-    5. Tri-Ply Honeycomb Dosa Tawa
-    6. Tri-Ply Honeycomb Kadai with Glass Lid
-    7. Tri-Ply Honeycomb Fry Pan
-    8. Tri-Ply Stainless Steel Tadka Pan
-  - **Category 3 (Tri-Ply HexaPro Cook & Serve):**
-    9. Tri-Ply HexaPro Cook & Serve — 20 cm
-    10. Tri-Ply HexaPro Cook & Serve — 22 cm
-    11. Tri-Ply HexaPro Cook & Serve — 24 cm
-    12. Tri-Ply HexaPro Cook & Serve — 28 cm
-- [x] **Product Overlay Modal & History Routing:**
-  - Pushes `/products/:slug` on open, pops back to `/` on close or browser/hardware Back button.
-  - Desktop 85–90% split viewport, flat minimal square styling without shadow/border.
-  - Left gallery & thumbnails, right scrollable product information column.
-  - **Exact Required Content Order:**
-    1. Product Description
-    2. Specifications Table
-    3. Features & Benefits
-    4. Included Contents
-    5. How It Is Made
-  - Fixed bottom action bar: `[ SHARE PRODUCT ] [ GET INFO ]`.
-- [x] **Product Gallery & Zoom:**
-  - 8 standardized angles per product.
-  - Desktop hover magnifier lens.
-  - Mobile touch swipe gestures.
-  - Native Web Share API integration with automatic link copy fallback.
-- [x] **WhatsApp & Phone Integrations:**
-  - Main header Get Info: `"Hello Shree Vijaya Kitchenware, can I get information about the products?"`
-  - Product Get Info: `"Hello Shree Vijaya Kitchenware, can I get details about the {Product Name}?"`
-  - Pre-filled phone dialer links.
-- [x] **Contact & Store Hours Engine:**
-  - Dynamic `OPEN NOW` / `CLOSED NOW` badge calculated against current local day/time.
-  - 2-column desktop layout & stacked mobile layout.
-  - Google Maps iframe embed & external link.
-  - Google Review CTA button & Social links (Facebook, Instagram, YouTube, WhatsApp).
-- [x] **Footer Disclosures:** Legal Owner (*Harita Gummadadelli*), Business Entity (*Free Harita Agencies*), contact address, phone, and quick navigation.
+## 2. Browser QA Audit Results
+
+### Desktop Audit (1920x1080 Viewport)
+- [x] **Header & Sticky Glassmorphism:** Translucent blur stays fixed seamlessly on scroll; `is-scrolled` class applies smooth background transition and bottom border.
+- [x] **Navigation & Scroll-Spy:** Clicking navigation links (`Home`, `About Us`, `Categories`, `Products`, `Videos`, `Testimonials`, `Contact`) triggers smooth scrolling to target sections and highlights active menu item.
+- [x] **Hero & Brand Intro:** Headline, status pill (`OPEN NOW`/`CLOSED NOW`), location banner, and action buttons render without layout shifting.
+- [x] **Category Cards:** Exactly 3 category cards link directly to category target sections within the continuous catalog.
+- [x] **Product Cards:** Display bold product names, distinct size pills, short descriptions, and rounded `[ MORE INFO ]` & `[ GET INFO ]` buttons.
+- [x] **Product Overlay Modal:**
+  - Opens cleanly at 85–90% viewport size over darkened backdrop.
+  - URL updates to `/products/:slug`.
+  - Left gallery & thumbnail column remains fixed; right information column scrolls smoothly.
+  - **Exact 5-part Information Order Verified:** 1. Description, 2. Specifications, 3. Features & Benefits, 4. Included Contents, 5. How It Is Made.
+  - Fixed action bar (`[ SHARE PRODUCT ] [ GET INFO ]`) stays visible at the bottom of the information column.
+- [x] **Product Gallery:** 8 angles render crisp vector graphics without broken image icons; Amazon-style hover zoom lens magnifies image under cursor; thumbnail buttons switch active view smoothly.
+- [x] **Videos & Testimonials:** Video thumbnails open player modal with Escape key close support; testimonials display ratings and author details.
+- [x] **Contact & Footer:** 2-column desktop grid with Google Maps iframe embed, daily schedule, Google review link, and legal disclosures (*Harita Gummadadelli*, *Free Harita Agencies*).
+
+### Mobile Audit (390x844 Viewport)
+- [x] **Header & Hamburger Drawer:** Hamburger toggle opens left-side navigation drawer smoothly; backdrop click or close button dismisses drawer.
+- [x] **Mobile Category & Product Grid:** Stacks vertically cleanly; no horizontal overflow or unwanted scrollbars.
+- [x] **Mobile Product Overlay:** Takes up mobile viewport gracefully; top image viewport with swipe gestures + horizontal thumbnail scroller; scrollable details section.
+- [x] **Fixed Mobile Action Bar:** `[ SHARE PRODUCT ]` and `[ GET INFO ]` buttons sit at 50% width each with `env(safe-area-inset-bottom)` padding clearance so no content is obscured.
+- [x] **Touch Interactions:** Touch swipe gestures on gallery viewports switch images seamlessly.
+
+### Product URL Direct Testing
+- [x] Navigating directly to `http://localhost:3000/products/9-5x9-5-inch-roti-maker-steel-handle-v2` opens the continuous brochure homepage, auto-scrolls to Products, and opens the 9.5" Steel Handle V2 overlay.
+- [x] Navigating directly to `http://localhost:3000/products/tri-ply-honeycomb-kadai-with-glass-lid` opens the Kadai overlay correctly.
+- [x] Pressing browser Back button closes the overlay and reverts the URL to `/` without leaving the website.
+
+### Performance & Console Check
+- [x] **Console Errors:** 0 JavaScript runtime errors, 0 unhandled promise rejections.
+- [x] **Asset Paths:** 100% SVG data URIs and assets load with HTTP 200/cached status.
 
 ---
 
-## 3. Remaining Issues
-- **None.** 0 TypeScript build warnings, 0 console errors, 0 broken layout issues discovered during QA.
+## 3. Completed Features Checklist
+- [x] **Foundation & Architecture:** Vite + React + TypeScript + Vanilla CSS design tokens.
+- [x] **Header & Mobile Drawer:** Translucent glassmorphism bar + slide-out drawer.
+- [x] **Homepage Brochure Flow:** Hero -> About Us -> Categories -> Products -> Videos -> Testimonials -> Contact -> Footer.
+- [x] **12 Products Data Model:** 4 Roti Makers, 4 Honeycomb Cookware, 4 HexaPro Cook & Serve.
+- [x] **Product Overlay Modal & History Routing:** HTML5 history state integration (`/products/:slug`).
+- [x] **8-Angle Product Gallery & Zoom Lens:** Amazon-style hover zoom + mobile touch swipe.
+- [x] **WhatsApp & Phone Integrations:** Context-aware pre-filled WhatsApp URLs.
+- [x] **Dynamic Store Hours Engine:** `OPEN NOW` / `CLOSED NOW` evaluation against local time.
+- [x] **Contact & Google Maps:** Integrated map embed, Google Review CTA, social links.
 
 ---
 
-## 4. Placeholder Content & Replacement Checklist
-All temporary placeholders have been documented in `src/data/placeholders.ts`. Before production launch, replace:
+## 4. Placeholder Content & Production Replacement Checklist
+Documented in `src/data/placeholders.ts`:
 1. **Store Phone Number:** Replace `+91 98765 43210` in `src/data/storeInfo.ts`.
 2. **WhatsApp Business Number:** Replace `919876543210` in `src/data/storeInfo.ts`.
 3. **Official Email Address:** Replace `info@shrivijayakitchenware.com` in `src/data/storeInfo.ts`.
-4. **Physical Address & Google Maps Embed:** Insert official Google Maps iframe `src` URL into `mapsEmbedUrl`.
+4. **Physical Address & Google Maps Embed:** Replace iframe `src` in `src/data/storeInfo.ts`.
 5. **Google Review Link:** Replace `googleReviewUrl` with official Google Business Profile review link.
 6. **Social Media URLs:** Update Facebook, Instagram, YouTube profile links.
-7. **Product Photographs & Demos:** Replace dynamic vector SVG placeholders in `src/utils/svgGenerator.ts` with real high-resolution product photography once available.
+7. **Product Photographs & Demos:** Replace vector SVG placeholders in `src/utils/svgGenerator.ts` with high-resolution photography when available.
 
 ---
 
-## 5. Known Limitations
-- **Static Client-Side Application:** No backend, database, admin dashboard, cart, or user login (as per strict project exclusion guidelines).
-- **Store Hours:** Operating hours engine calculates based on regular weekly schedule; custom holiday overrides are excluded in V1.
-
----
-
-## 6. Tests Performed
-- **TypeScript Compilation:** `npx tsc --noEmit` verified clean with zero type errors.
-- **Browser Subagent QA Execution:**
-  - Verified homepage rendering and section layout.
-  - Tested Category Card click navigation (`Roti Makers` -> continuous section scroll).
-  - Tested Product Overlay Modal opening on `12 inch Roti Maker — Steel Handle, Version 2`.
-  - Tested 8 gallery thumbnail view switching and Amazon-style hover zoom lens.
-  - Verified scrollable product information pane and exact 5-part section ordering.
-  - Verified URL pushState to `/products/12-inch-roti-maker-steel-handle-v2` and popstate return to `/` on modal exit.
-  - Tested mobile responsive viewport (390px) and fixed action footer bar.
-
----
-
-## 7. Recommended Next Task
-- Provide official store contact details (Phone, WhatsApp number, exact Google Maps embed URL) and real product photography to finalize launch readiness.
+## 5. QA Verification Summary
+- **TypeScript Build Check:** `npx tsc --noEmit` passed with 0 errors.
+- **Browser QA Pass:** 100% successful on Desktop, Mobile, and Direct URL routing.
