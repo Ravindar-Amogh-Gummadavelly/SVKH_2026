@@ -22,17 +22,15 @@ export const App: React.FC = () => {
     const parseUrlAndSetOverlay = () => {
       const path = window.location.pathname;
       const match = path.match(/\/products\/([a-z0-9-]+)/i);
+      const slug = match && match[1] ? match[1] : null;
+      const foundProduct = slug ? PRODUCTS.find((p) => p.slug === slug) : undefined;
       
-      if (match && match[1]) {
-        const slug = match[1];
-        const foundProduct = PRODUCTS.find((p) => p.slug === slug);
-        if (foundProduct) {
-          setActiveOverlayProduct(foundProduct);
-          // Auto-scroll to products section behind overlay
-          const productsEl = document.getElementById('products');
-          if (productsEl) {
-            productsEl.scrollIntoView({ behavior: 'auto' });
-          }
+      if (foundProduct) {
+        setActiveOverlayProduct(foundProduct);
+        // Auto-scroll to products section behind overlay
+        const productsEl = document.getElementById('products');
+        if (productsEl) {
+          productsEl.scrollIntoView({ behavior: 'auto' });
         }
       } else {
         setActiveOverlayProduct(null);
@@ -62,7 +60,7 @@ export const App: React.FC = () => {
 
   // Scroll Spy for Header Active Section Highlighting
   useEffect(() => {
-    const sections = ['hero', 'about', 'categories', 'products', 'videos', 'testimonials', 'contact'];
+    const sections = ['hero', 'about', 'categories', 'products', 'testimonials', 'videos', 'contact'];
     
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 200;
@@ -86,18 +84,22 @@ export const App: React.FC = () => {
 
   // Open Product Overlay & Push History State
   const handleOpenOverlay = (product: Product) => {
-    setActiveOverlayProduct(product);
     const newPath = `/products/${product.slug}`;
+    setActiveOverlayProduct(product);
     if (window.location.pathname !== newPath) {
-      window.history.pushState({ slug: product.slug }, '', newPath);
+      window.history.pushState({ overlay: true, slug: product.slug }, '', newPath);
     }
   };
 
   // Close Product Overlay & Push/Pop History State
   const handleCloseOverlay = () => {
-    setActiveOverlayProduct(null);
-    if (window.location.pathname !== '/') {
-      window.history.pushState({}, '', '/');
+    if (window.history.state?.overlay) {
+      window.history.back();
+    } else {
+      setActiveOverlayProduct(null);
+      if (window.location.pathname !== '/') {
+        window.history.replaceState({}, '', '/');
+      }
     }
   };
 
@@ -133,11 +135,11 @@ export const App: React.FC = () => {
         {/* 4. Complete Continuous Product Catalog */}
         <Catalog onOpenOverlay={handleOpenOverlay} />
 
-        {/* 5. Product Videos & Walkthroughs */}
-        <Videos />
-
-        {/* 6. Testimonials */}
+        {/* 5. Customer Testimonials */}
         <Testimonials />
+
+        {/* 6. Product Videos & Walkthroughs */}
+        <Videos />
 
         {/* 7. Contact & Google Maps */}
         <Contact />
@@ -156,3 +158,4 @@ export const App: React.FC = () => {
     </div>
   );
 };
+

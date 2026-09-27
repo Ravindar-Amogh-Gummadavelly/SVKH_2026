@@ -13,7 +13,10 @@ export async function shareProduct(name: string, url: string): Promise<{ success
       await navigator.share(shareData);
       return { success: true, method: 'share' };
     } catch (err) {
-      // User cancelled or share failed, fallback to copy link
+      if (err instanceof Error && (err.name === 'AbortError' || err.name === 'NotAllowedError')) {
+        return { success: false, method: 'share' };
+      }
+      // Fall through to clipboard if share failed for other reasons
     }
   }
 
